@@ -11,6 +11,8 @@ public class QnaVo {
 	private String QNAWRITER;
 	private String QNAREGISTERDATE;
 	private int QNAVIEWCOUNT;
+	private String QNAIMAGE;
+	private int IMAGE;
 
 	public int getQNACODE() {
 		return QNACODE;
@@ -48,5 +50,17 @@ public class QnaVo {
 	public void setQNAVIEWCOUNT(int qNAVIEWCOUNT) {
 		QNAVIEWCOUNT = qNAVIEWCOUNT;
 	}
-
+	public String getQNAIMAGE() {
+		return QNAIMAGE;
+	}
+	public void setQNAIMAGE(String qNAIMAGE) {
+		QNAIMAGE = qNAIMAGE;
+	}
+	public int getIMAGE() {
+		return IMAGE;
+	}
+	public void setIMAGE(int iMAGE) {
+		IMAGE = iMAGE;
+	}
+	
 }

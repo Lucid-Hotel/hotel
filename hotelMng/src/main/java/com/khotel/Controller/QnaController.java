@@ -124,6 +124,9 @@ public class QnaController {
 		vo.setQNACONTENT(request.getParameter("qnacontent"));
 		vo.setQNAWRITER(writer);
 		
+		if(file != null) vo.setIMAGE(1);
+		else vo.setIMAGE(0);
+		
 		Date now = new Date();
 		SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd", Locale.KOREA);
 		String time = format.format(now);
@@ -135,7 +138,7 @@ public class QnaController {
 		try {
 			qnaService.create(vo);
 			String qnaId = qnaService.getQnaId(vo);
-			UploadFileUtils.uploadFile(qnaId, file);
+			if(file != null) UploadFileUtils.uploadFile(qnaId, file);
 			mav.addObject("resultMsg", "success");
 
 		} catch (Exception e) {
@@ -151,29 +154,59 @@ public class QnaController {
 			HttpSession session) throws Exception{
 		
 		qnaService.increaseViewcnt(QNACODE);
+		QnaVo qna = qnaService.read(QNACODE);
+		
+		MemberVo member = new MemberVo();
+		member = (MemberVo) session.getAttribute("member");
+		String user = null;
+		if(member != null) user = member.getUserId();
+		
+		int imageCnt = qna.getIMAGE();
+		System.out.println("image cnt : " + imageCnt);
+		
+		if(imageCnt == 0) qna.setQNAIMAGE(null);
+		else qna.setQNAIMAGE("https://lucid-hotel-bucket.s3.amazonaws.com/lucid-hotel-bucket/qna/" + qna.getQNACODE() + ".jpg");
+		
+		System.out.println("qna image url : " + qna.getQNAIMAGE());
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("qna/view");
-		mav.addObject("dto", qnaService.read(QNACODE));
-		mav.addObject("curpage", curPage);
+		mav.addObject("dto", qna);
+		mav.addObject("user", user);
 		return mav;
 		
 	}
 	
-	
-	
-	@RequestMapping(value="/qna/update.do", method= RequestMethod.GET)
-	public String update(
+	@RequestMapping(value="/qna/update.do", method= RequestMethod.POST)
+	public ModelAndView update(Model model,
+			@RequestPart("uploadFile") MultipartFile file,
 			@RequestParam int QNACODE,
 			@RequestParam("QNATITLE") String title,
 			@RequestParam("QNACONTENT") String content) throws Exception {
+		
 		QnaVo vo = qnaService.read(QNACODE);
 		vo.setQNATITLE(title);
 		vo.setQNACONTENT(content);
-		qnaService.update(vo);
-		return "redirect:/qna/list.do";
+		
+		
+		if(file != null) vo.setIMAGE(1);
+		else vo.setIMAGE(0);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("qna/rewriteQna");
+		
+		try {
+			qnaService.update(vo);
+			String qnaId = Integer.toString(QNACODE);
+			if(file != null) UploadFileUtils.uploadFile(qnaId, file);
+			mav.addObject("resultMsg", "success");
+
+		} catch (Exception e) {
+			mav.addObject("resultMsg", "fail");
+		}
+		
+		return mav;
 	}
-	
-	
 	
 	@RequestMapping(value="/qna/delete.do", method=RequestMethod.GET)
 	public String updat(
@@ -203,6 +236,4 @@ public class QnaController {
 	
 	}
 	
-	
-
 }

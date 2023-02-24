@@ -97,7 +97,12 @@
 			</tr>
 
 		</table>
-		<button type="button" id="btnWrite" onclick="location.href='/qna/write.do'">글쓰기</button>
+		<c:choose>
+         <c:when test="${member != null}">
+         	<button type="button" id="btnWrite" onclick="location.href='/qna/write.do'">글쓰기</button>
+         </c:when>
+      </c:choose>
+		
 	</div>
 	<%@include file = "/WEB-INF/views/layout/final.jsp" %>
 </div>

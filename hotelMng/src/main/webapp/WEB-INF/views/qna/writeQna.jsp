@@ -42,10 +42,6 @@
   	    var fileObj = fileList[0];
   	    var fileName = fileObj.name;
 
-		if(!fileCheck(fileObj.name, fileObj.size)){
-			return false;
-		}
-
 		formData.append("uploadFile", fileObj);
 
 		var data = {"qnatitle" : qnatitle,
@@ -58,83 +54,11 @@
 			dataType : 'json',
 			async : false,
 			processData : false,
-	    	//contentType : false,
 	    	enctype: "multipart/form-data",
 			url : "/qna/insert.do",
-			data : data,
-			
-			success : function(data) {
-				console.log("test");
-				var result = data["resultMsg"];
-				if(result == "success"){
-					alert("작성되었습니다!");
-					location.href="/mypage/mylist";
-				}else {
-					alert("다시 작성해주세요.");
-				}
-			}
-			
+			data : data			
   	  	 })
-  	  	 
-		 console.log("formData : " + formData);
-		 console.log("fileList : " + fileList);
-		 console.log("fileObj : " + fileObj);
-		 console.log("fileName : " + fileName);
 	  }
-	
-
-	/* 이미지 업로드 */
-	/*
-	$("input[type='file']").on("change", function(e){
-		let formData = new FormData();
-		let fileInput = $('input[name="uploadFile"]');
-		let fileList = fileInput[0].files;
-		let fileObj = fileList[0];
-
-		if(!fileCheck(fileObj.name, fileObj.size)){
-			return false;
-		}
-		
-		alert("통과");
-		formData.append("uploadFile", fileObj);
-		
-		console.log("fileList : " + fileList);
-		console.log("fileObj : " + fileObj);
-		console.log("fileName : " + fileObj.name);
-		console.log("fileSize : " + fileObj.size);
-		console.log("fileType(MimeType) : " + fileObj.type);
-
-		$.ajax({
-			url: '/qna/insert.do',
-	    	processData : false,
-	    	contentType : false,
-	    	data : formData,
-	    	type : 'POST',
-	    	dataType : 'json'
-		});	
-	});
-	*/
-	
-  	/* var, method related with attachFile */
-  	  let regex = new RegExp("(.*?)\.(jpg|png)$");
-  	  let maxSize = 1048576; //1MB	
-  	
-  	  function fileCheck(fileName, fileSize){
-  
-    	if(fileSize >= maxSize){
-  	  		alert("파일 사이즈 초과");
-  			return false;
-  		}
-  			  
-  		if(!regex.test(fileName)){
-  			alert("해당 종류의 파일은 업로드할 수 없습니다.");
-  			return false;
-  		}
-  		
-  		return true;		
-  		
-  	  }
-  
   	  
   	  </script>
   </head>

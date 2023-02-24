@@ -19,6 +19,50 @@
 		<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js?autoload=false"></script>
 		<script charset="UTF-8" type="text/javascript" src="http://t1.daumcdn.net/postcode/api/core/190107/1546836247227/190107.js"></script>
 
+		<script type="text/javascript">
+		  var result = '${resultMsg}';
+		  if(result == "success"){
+			  alert("작성되었습니다!");
+			  document.location.href="/mypage/mylist";
+		  } else if(result == "fail") {
+			  alert("다시 작성해주세요.");
+		  }
+		  </script>
+	  	  
+		  <script type="text/javascript">
+	
+	  	  /*이미지 업로드*/
+	  	  function insertQna() {
+	
+	    	var qnatitle = $('#qnatitle').val();
+	    	var qnacontent = $('#qnacontent').val();
+	    	
+	  	  	var formData = new FormData();
+	  	    var fileInput = $('input[name="uploadFile"]');
+	  	    var fileList = fileInput[0].files;
+	  	    var fileObj = fileList[0];
+	  	    var fileName = fileObj.name;
+	
+			formData.append("uploadFile", fileObj);
+	
+			var data = {"qnatitle" : qnatitle,
+						"qnacontent" : qnacontent,
+						formData
+			}
+			
+			$.ajaxForm({
+				type : "POST",
+				dataType : 'json',
+				async : false,
+				processData : false,
+		    	enctype: "multipart/form-data",
+				url : "/qna/insert.do",
+				data : data			
+	  	  	 })
+		  }
+	  	  
+	  	  </script>
+  	  
 	</head>
 
 <body>
@@ -42,7 +86,7 @@
 
 		<div class=contents>
 			<h2>게시물 보기</h2>
-			<form action="/qna/update.do" method="get">
+			<form action="/qna/update.do" action="/qna/update.do" method="post" enctype="multipart/form-data">
 
 				<h3 class="tit_">● 작성자 정보</h3>
 				<div class="col_one_third">
@@ -64,6 +108,13 @@
 					<input class="d_form large" name="QNATITLE" id="QNATITLE"  value = "${dto.QNATITLE}">
 				</div>
 
+				<div class="col_one_third col_last">
+	               <h3 class="join_title"><label for="question_type">사진 추가</label></h3>
+	               <!-- <input type="file" id="fileItem" name="uploadFile" accept="image/*"> -->
+	               <input type="file" id ="fileItem" name='uploadFile'>
+					<!--  <input type="file" id="chooseFile" name="chooseFile" accept="image/*" onchange="loadFile(this)"> -->
+	            </div>
+           
 				<div class="clear"></div>
 
 				<div class="col_full">
@@ -73,7 +124,7 @@
 
 				<div>
 					<input type="hidden" name = "QNACODE" value="${dto.QNACODE}">
-					<button type ="submit" class="btn_sbm"m id = "btnUpdate" onclick="location.href='/qna/update.do?QNACODE=${dto.QNACODE}'">수정</button>
+					<button type ="submit" class="btn_sbm"m id = "btnUpdate" onclick="insertQna();">수정</button>
 					<button type ="button" class="btn_sbm" id = "btnDelete" onclick="location.href='/qna/delete.do?QNACODE=${dto.QNACODE}'">삭제</button>
 					<button type ="button" class="btn_sbm" id = "btnList" onclick="location.href='/qna/list.do'">목록</button>
 				</div>

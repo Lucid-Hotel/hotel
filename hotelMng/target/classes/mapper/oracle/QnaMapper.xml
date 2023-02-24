@@ -44,14 +44,18 @@
 		QNATITLE, 
 		QNACONTENT, 
 		QNAWRITER,
-		QNAREGISTERDATE) 
+		QNAREGISTERDATE,
+		QNAVIEWCOUNT,
+		IMAGE) 
 
 		VALUES
 		(seq_board.nextval, 
 		#{QNATITLE}, 
 		#{QNACONTENT}, 
 		#{QNAWRITER},
-		#{QNAREGISTERDATE}
+		#{QNAREGISTERDATE},
+		0,
+		#{IMAGE}
 		)
 		</insert>
 
@@ -63,7 +67,7 @@
 	</update>
 
 	 <select id="view" resultType = "com.khotel.Vo.QnaVo">
-		select QNACODE, QNATITLE, QNACONTENT, QNAREGISTERDATE, QNAVIEWCOUNT, QNAWRITER
+		select QNACODE, QNATITLE, QNACONTENT, QNAREGISTERDATE, QNAVIEWCOUNT, QNAWRITER, IMAGE
 		from QNA
 		where QNACODE = #{QNACODE}
 	</select>

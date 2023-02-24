@@ -341,11 +341,7 @@ public class HomeController {
 		} catch (Exception e) {
 			
 		}
-		System.out.println("reservationList: " + reservationList);
-		System.out.println("checkin: " + reservationList.get(0).getReservationCheckIn());
-		System.out.println("checkOut: " + reservationList.get(0).getReservationCheckOut());
-		System.out.println("reservationcode: " + reservationList.get(0).getReservationCode());
-		
+		System.out.println("reservationList: " + reservationList);		
 		
 		Calendar cal = Calendar.getInstance();
 		DateData calendarData;
