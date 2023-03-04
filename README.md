@@ -2,7 +2,18 @@
 
 # <img src="lucid-hotel-logo.png" height="50" width="50" style="vertical-align:top"/>Lucid Hotel Project
 
-**Lucid Hotel** 은 ~ 사이트입니다.
+**Lucid Hotel** 은 실제 호텔에 적용 가능하도록 구현한 호텔 웹 사이트입니다.
+
+
+## ✏ 주요 기능
+- 회원 가입 및 로그인
+- 객실 예약 및 조회
+- 문의 등록 및 조회
+- 마이페이지 (회원정보, 객실 예약 정보, 문의 내역, Reward 등급)
+- 관리자 페이지 (회원, 직원, 예약, 문의 관리)
+- 룸 서비스 (객실 내의 테블릿으로 물, 수건, 어메니티, 청소 요청 및 직원 연결 가능)
+
+
 
 Demo : https://youtu.be/TRi5djNli8k
 
