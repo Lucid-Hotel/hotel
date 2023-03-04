@@ -18,7 +18,7 @@
 Demo : https://youtu.be/TRi5djNli8k
 
 ![Home](https://user-images.githubusercontent.com/33611439/222906999-2d4d6499-a1db-485a-a1ff-a0768f1e3383.gif)
-![Reservation](https://user-images.githubusercontent.com/33611439/222907240-30381b1f-8ebb-45ec-ae4d-45491af012e7.gif)
+![Reservation](https://user-images.githubusercontent.com/33611439/222920617-b02506f3-dec4-4b41-8e6a-85d7b808e690.gif)
 
 ## ✏ AWS System Architecture - As Is
 
